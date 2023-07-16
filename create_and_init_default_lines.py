@@ -1,15 +1,17 @@
 from datetime import datetime
 from webapp import create_app
 from webapp.db import db
-from webapp.trends.models import Lines
+from webapp.tunings.models import Lines
+from cfg import LINES_PARAMS
 
 app = create_app()
 
 
-def add_reccord_in_base(name='Line_name', port=0, adr=16):
-    lines = Lines(name=name,
-                  port=port,
-                  adr=adr,
+def add_reccord_in_base(line_params):
+    lines = Lines(name=line_params['name'],
+                  line_number = line_params['line_number'],
+                  port=line_params['port'],
+                  adr=line_params['adr'],
                   k=1.0,
                   no_connection_counter=False,
                   indikator_value=0,
@@ -34,12 +36,6 @@ def clear_base():
 if __name__ == '__main__':
     with app.app_context():
         # clear_base()
-        add_reccord_in_base('Line_1', port=0, adr=101)
-        add_reccord_in_base('Line_2', port=0, adr=102)
-        add_reccord_in_base('Line_3', port=0, adr=103)
-        add_reccord_in_base('Line_4', port=0, adr=104)
-        add_reccord_in_base('Line_5', port=0, adr=105)
-        add_reccord_in_base('Line_6', port=0, adr=106)
-        add_reccord_in_base('Line_7', port=1, adr=107)
-        add_reccord_in_base('Line_8', port=1, adr=108)
+        for line_params in LINES_PARAMS:
+            add_reccord_in_base(line_params)        
         db.session.commit()
