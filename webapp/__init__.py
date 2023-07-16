@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from webapp.admin.views import blueprint as admin_blueprint
 from webapp.db import db
 from webapp.trends.views import blueprint as trends_blueprint
+from webapp.tunings.views import blueprint as tunings_blueprint
 from webapp.user.models import User
 from webapp.user.views import blueprint as user_blueprint
 
@@ -21,6 +22,7 @@ def create_app():
     login_manager.login_view = 'user.login'
     app.register_blueprint(user_blueprint)
     app.register_blueprint(trends_blueprint)
+    app.register_blueprint(tunings_blueprint)
     app.register_blueprint(admin_blueprint)
 
     @login_manager.user_loader
