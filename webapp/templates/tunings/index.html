@@ -33,7 +33,7 @@
         <table border="2" bordercolor="grey"  align="center" width="100%"
         cellpadding="10" >            
             <tr>
-                <th> id </th>
+                <th> № линии - id </th>
                 <th> Название линии </th>
                 <th> № порта </th>
                 <th> Адрес </th>
@@ -44,11 +44,16 @@
             </tr>     
             {% for line in lines %}                      
                 <tr>
-                    <td> {{ line['id'] }} </td>       
+                    <td> {{  line['line_number']  }} - {{ line['id'] }} </td>       
                     <td> {{ line['name'] }} </td>    
                     <td> {{ line['port'] }} </td>    
                     <td> {{ line['adr'] }} </td>    
-                    <td> {{ line['k'] }} </td>    
+                    <td> {{ line['k'] }} 
+                        <form action="{{ url_for('test_1.equation') }}" method="post">
+                            {{ form.csrf_token }}     
+                            {{ form.koef_a }} - {{ form.submit }}
+                        </form>
+                    </td>    
                     <td  {% if not line['no_connection_counter'] %} style="background-color: Red" {% endif %} >
                         {{ line['length'] }} 
                     </td>    

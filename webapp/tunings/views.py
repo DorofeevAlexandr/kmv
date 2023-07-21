@@ -31,6 +31,7 @@ def read_data_in_base():
     for line in lines:
         params.append({
             'id' : line.id,
+            'line_number' : line.line_number,
             'name' : line.name,
             'port' : line.port,
             'adr' : line.adr,
