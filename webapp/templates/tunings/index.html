@@ -2,6 +2,7 @@
 {% block content %}
 <div class='row'>
     <div class='col-12'>
+
         {% with messages = get_flashed_messages() %}
           {% if messages %}
           <div class="alert alert-warning" role="alert">
@@ -12,24 +13,7 @@
           {% endif %}
         {% endwith %}
 
-
-        <form action="" method="post"  novalidate>
-        <table>
-            <tr>
-                <td>
-                    {{ form.select_date.label }}
-                </td>
-                <td>
-                    {{ form.select_date }}
-                </td>
-                <td>{{ form.update }} </td>
-            </tr>
-        </table>
-        </form>
-
-
-       
-
+ 
         <table border="2" bordercolor="grey"  align="center" width="100%"
         cellpadding="10" >            
             <tr>
@@ -48,12 +32,7 @@
                     <td> {{ line['name'] }} </td>    
                     <td> {{ line['port'] }} </td>    
                     <td> {{ line['adr'] }} </td>    
-                    <td> {{ line['k'] }} 
-                        <form action="{{ url_for('test_1.equation') }}" method="post">
-                            {{ form.csrf_token }}     
-                            {{ form.koef_a }} - {{ form.submit }}
-                        </form>
-                    </td>    
+                    <td> {{ line['k'] }}   </td>    
                     <td  {% if not line['no_connection_counter'] %} style="background-color: Red" {% endif %} >
                         {{ line['length'] }} 
                     </td>    
@@ -62,6 +41,45 @@
                 </tr>
             {% endfor %}
         </table>    
+
+        <form action="" method="post"  novalidate>
+            <table>
+                <tr>
+                    <td>                   
+                        {{ form_select.csrf_token }}
+                        {{ form_select.select_line.label }}
+                        {{ form_select.select_line }}  
+                    </td>
+                    <td>
+                        <button type="Submit">Выбрать</button>
+                    </td>
+                </tr>
+            </table>
+            </form>
+
+            <table border="2" bordercolor="grey"  align="center" width="100%"
+            cellpadding="10" >            
+                <tr>
+                    <th> № линии </th>
+                    <th> Название линии </th>
+                    <th> № порта </th>
+                    <th> Адрес </th>
+                    <th> Коэффициент </th>
+                    <th> Полное название линии </th>               
+                </tr>     
+                <tr>
+                    <form action="" method="post"  novalidate>
+                        {{ form_tuning.csrf_token }}
+                        <td> {{ form_tuning.line_number }} </td>       
+                        <td> {{ form_tuning.name }} </td>    
+                        <td> {{ form_tuning.port }} </td>    
+                        <td> {{ form_tuning.adr }} </td>    
+                        <td> {{ form_tuning.k }}   </td>                        
+                        <td> {{ form_tuning.description }} </td>   
+                        <td> {{ form_tuning.save }} </td>
+                    </form> 
+                </tr>
+            </table>    
 
     </div>
 

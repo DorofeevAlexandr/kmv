@@ -2,8 +2,8 @@ from webapp.db import db
 
 class Lines(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    line_number = db.Column(db.Integer, nullable=False)
-    name = db.Column(db.String, nullable=False)
+    line_number = db.Column(db.Integer, nullable=False, unique=True)
+    name = db.Column(db.String, nullable=False, unique=True)
     port = db.Column(db.Integer, nullable=False)
     adr = db.Column(db.Integer, nullable=False)
     k = db.Column(db.Float, nullable=False)

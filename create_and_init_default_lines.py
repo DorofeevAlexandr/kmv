@@ -17,7 +17,7 @@ def add_reccord_in_base(line_params):
                   indikator_value=0,
                   length=0.0,
                   speed_line=0.0,
-                  description='',
+                  description=line_params['description'],
                   created_dt=datetime.now(),
                   updated_dt=datetime.now()
                   )
