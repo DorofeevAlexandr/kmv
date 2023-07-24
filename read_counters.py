@@ -20,7 +20,7 @@ def run_sync_client(host=None, port=None):
 
     client = ModbusSerialClient(
         method='rtu',
-        port='/dev/ttyUSB0',
+        port='/dev/ttyS0',
         baudrate=9600,
         framer=ModbusRtuFramer,
         timeout=10,
@@ -40,7 +40,7 @@ def run_sync_client(host=None, port=None):
 
     print("get and verify data")
     try:
-        rr = client.read_coils(1, 1, slave=1)
+        rr = client.read_coils(1, 1, slave=106)
     except ModbusException as exc:
         print(f"Received ModbusException({exc}) from library")
         client.close()
