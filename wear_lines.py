@@ -80,11 +80,15 @@ def update_line_in_base(line_params, ind_value=0, conected=False, length=0):
         db.session.commit()       
 
 
+def read_and_save_in_base():
+    lines = read_data_in_base()
+    read_all_lines(lines)
+    append_in_csv(lines)
+
+
 if __name__ == '__main__':
     with app.app_context():
         while True:
-            lines = read_data_in_base()
-            read_all_lines(lines)
-            append_in_csv(lines)
-            # break
+            read_and_save_in_base()
+            break
             _time.sleep(60)
