@@ -10,6 +10,60 @@ from pymodbus.transaction import (
     ModbusTlsFramer,
 )
 
+def read_input_registers_modbus_device(port='/dev/ttyS0', slave_adr=16,
+                                       offset=0, length=8):
+    client = ModbusSerialClient(
+        method='rtu',
+        port=port,
+        baudrate=9600,
+        framer=ModbusRtuFramer,
+        timeout=3,
+        retries=3,
+        retry_on_empty=False,
+        close_comm_on_error=False,
+        strict=True,
+        bytesize=8,
+        parity="N",
+        stopbits=1,
+        handle_local_echo=False,
+    )
+
+    client.connect()
+    try:
+        rr = client.read_input_registers(offset, length, slave=slave_adr)
+    except ModbusException as exc:
+        client.close()
+        return
+    if rr.isError():
+        client.close()
+        return
+    if isinstance(rr, ExceptionResponse):
+        # THIS IS NOT A PYTHON EXCEPTION, but a valid modbus message
+        client.close()
+        return
+    client.close()
+    return rr.registers
+
+
+def get_indikator_value(registers):
+    try:
+        if registers:
+            w0 = registers[0]
+            w1 = registers[1]
+            return w0 * 65536 + w1
+        return 0
+    except:
+        return 0
+
+def get_conection(registers):
+    try:
+        if registers:
+            w7 = registers[7]
+            w8 = registers[8]
+            return w7 != 0 and w8 != 0
+        return False
+    except:
+        return False
 
 def run_sync_client(host=None, port=None):
     """Run sync client."""
