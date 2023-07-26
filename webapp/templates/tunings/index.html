@@ -21,6 +21,7 @@
                 <th> Название линии </th>
                 <th> № порта </th>
                 <th> Адрес </th>
+                <th> Число импульсов </th>
                 <th> Коэффициент </th>
                 <th> Длина </th>               
                 <th> Скорость линии </th>
@@ -31,7 +32,8 @@
                     <td> {{  line['line_number']  }} - {{ line['id'] }} </td>       
                     <td> {{ line['name'] }} </td>    
                     <td> {{ line['port'] }} </td>    
-                    <td> {{ line['adr'] }} </td>    
+                    <td> {{ line['adr'] }} </td>  
+                    <td> {{ line['indikator_value'] }} </td>    
                     <td> {{ line['k'] }}   </td>    
                     <td  {% if not line['no_connection_counter'] %} style="background-color: Red" {% endif %} >
                         {{ line['length'] }} 

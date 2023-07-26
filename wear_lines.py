@@ -52,6 +52,7 @@ def read_data_in_base():
             'adr' : line.adr,
             'k' : line.k,
             'no_connection_counter' : line.no_connection_counter,
+            'indikator_value' : line.indikator_value, 
             'length' : line.length,
             'speed_line' : line.speed_line,
             'description' : line.description,
