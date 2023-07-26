@@ -11,7 +11,7 @@ from pymodbus.transaction import (
 )
 
 def read_input_registers_modbus_device(port='/dev/ttyS0', slave_adr=16,
-                                       offset=0, length=8):
+                                       offset=0, length=9):
     client = ModbusSerialClient(
         method='rtu',
         port=port,
@@ -41,6 +41,7 @@ def read_input_registers_modbus_device(port='/dev/ttyS0', slave_adr=16,
         # THIS IS NOT A PYTHON EXCEPTION, but a valid modbus message
         client.close()
         return
+    print(rr.registers)
     client.close()
     return rr.registers
 
@@ -94,7 +95,7 @@ def run_sync_client(host=None, port=None):
 
     print("get and verify data")
     try:
-        rr = client.read_coils(1, 1, slave=106)
+        rr = client.read_input_registers(0, 9, slave=101)
     except ModbusException as exc:
         print(f"Received ModbusException({exc}) from library")
         client.close()
@@ -114,3 +115,6 @@ def run_sync_client(host=None, port=None):
 
 if __name__ == "__main__":
     run_sync_client()
+    reg = read_input_registers_modbus_device(port='/dev/ttyS0', slave_adr=101,
+                                             offset=0, length=9)
+    print(reg)

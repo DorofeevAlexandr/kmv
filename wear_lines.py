@@ -10,7 +10,7 @@ from webapp.tunings.models import Lines
 
 
 
-COUNTER_SIMULATION = True
+COUNTER_SIMULATION = False
 
 
 app = create_app()
@@ -86,4 +86,5 @@ if __name__ == '__main__':
             lines = read_data_in_base()
             read_all_lines(lines)
             append_in_csv(lines)
-            _time.sleep(30)
+            # break
+            _time.sleep(60)

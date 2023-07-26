@@ -74,3 +74,12 @@ sudo gpasswd --add ${USER} dialout
 
 
 ==================================================================
+
+[program:wear_lines]
+directory=/home/amd/kmv/
+command=home/amd/venv/bin/python3 wear_lines.py
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/supervisor/wear_lines.err.log
+stdout_logfile=/var/log/supervisor/wear_lines.out.log
+

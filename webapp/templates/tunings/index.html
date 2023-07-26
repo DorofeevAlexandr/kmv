@@ -35,7 +35,7 @@
                     <td> {{ line['adr'] }} </td>  
                     <td> {{ line['indikator_value'] }} </td>    
                     <td> {{ line['k'] }}   </td>    
-                    <td  {% if not line['no_connection_counter'] %} style="background-color: Red" {% endif %} >
+                    <td  {% if line['no_connection_counter'] %} style="background-color: Red" {% endif %} >
                         {{ line['length'] }} 
                     </td>    
                     <td> {{ line['speed_line'] }} </td>    
