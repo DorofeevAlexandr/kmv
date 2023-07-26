@@ -10,6 +10,9 @@ from cfg import LINES_PARAMS
 COUNTER_SIMULATION = True
 
 
+app = create_app()
+
+
 def read_all_lines(lines):
     for line in lines:
         if line['port'] == 0:
@@ -72,7 +75,7 @@ def update_line_in_base(line_params, ind_value=0, conected=False, length=0):
         db.session.commit()       
 
 
-
-app = create_app()
-
-lines = read_data_in_base()
+if __name__ == '__main__':
+    with app.app_context():
+        lines = read_data_in_base()
+        read_all_lines(lines)
