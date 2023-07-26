@@ -1,10 +1,13 @@
-from read_counter import read_input_registers_modbus_device, get_conection, get_indikator_value
-
 from datetime import datetime
+from cfg import LINES_PARAMS
+from read_counter import read_input_registers_modbus_device, get_conection, get_indikator_value
+from save_csv_file import append_in_csv
+import time as _time
+
 from webapp import create_app
 from webapp.db import db
 from webapp.tunings.models import Lines
-from cfg import LINES_PARAMS
+
 
 
 COUNTER_SIMULATION = True
@@ -37,8 +40,9 @@ def read_all_lines(lines):
                             ind_value=ind_value,
                             conected=conected,
                             length=length)
+        line['length'] = length
+        print(length)
         
-
 
 def read_data_in_base():
     params = []
@@ -78,5 +82,8 @@ def update_line_in_base(line_params, ind_value=0, conected=False, length=0):
 
 if __name__ == '__main__':
     with app.app_context():
-        lines = read_data_in_base()
-        read_all_lines(lines)
+        while True:
+            lines = read_data_in_base()
+            read_all_lines(lines)
+            append_in_csv(lines)
+            _time.sleep(30)
