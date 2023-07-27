@@ -46,12 +46,28 @@ apt-get install supervisor
 Чтобы supervisord стал запускать наш проект, напишем конфигурационный файл. 
 supervisor хранит их в папке /etc/supervisor/conf.d/
 ---------------
+
 [program:kmv]
-command=/root/venv/bin/gunicorn --bind=0.0.0.0:5000 wsgi:app
-directory=/root/kmv/
+command=/home/amd/venv/bin/gunicorn --bind=0.0.0.0:5000 wsgi:app
+directory=/home/amd/kmv/
 autostart=true
 autorestart=true
 redirect_stderr=true
+
+[program:kmv-celery]
+command=/home/amd/venv/bin/celery -A tasks worker --loglevel=INFO
+directory=/home/amd/kmv/
+autostart=true
+autorestart=true
+redirect_stderr=true
+
+[program:kmv-celery-beat]
+command=/home/amd/venv/bin/celery -A tasks beat
+directory=/home/amd/kmv/
+autostart=true
+autorestart=true
+redirect_stderr=true
+
 --------------
 
 Сначала зарегистрируем новый конфиг с помощью команды 
@@ -74,12 +90,3 @@ sudo gpasswd --add ${USER} dialout
 
 
 ==================================================================
-
-[program:wear_lines]
-directory=/home/amd/kmv/
-command=home/amd/venv/bin/python3 wear_lines.py
-autostart=true
-autorestart=true
-stderr_logfile=/var/log/supervisor/wear_lines.err.log
-stdout_logfile=/var/log/supervisor/wear_lines.out.log
-

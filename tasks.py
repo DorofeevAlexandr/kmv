@@ -15,4 +15,4 @@ def read_and_save_in_db():
 
 @celery_app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(crontab(second='*/30'), read_and_save_in_db.s())
+    sender.add_periodic_task(crontab(minute='*/1'), read_and_save_in_db.s())
