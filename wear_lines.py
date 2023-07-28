@@ -34,7 +34,7 @@ def read_all_lines(lines):
             ind_value = get_indikator_value(registers)
             conected = get_conection(registers)
 
-        length = ind_value * line['k'] / 1000.0
+        length = ind_value * line['k'] 
         update_line_in_base(line, 
                             ind_value=ind_value,
                             conected=conected,
