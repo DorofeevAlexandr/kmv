@@ -18,7 +18,7 @@ def create_dir():
     day = str(dt.day)
     file_name = 'Lines_data_' + year + '_' + month + '_' + day + '.csv'
     basedir = os.path.abspath(os.path.dirname(__file__))
-    path = os.path.join(basedir, 'Data', year, month, day)
+    path = os.path.join(basedir, 'Data', year, month)
     file_name = os.path.join(path, file_name)
     if not os.path.isdir(path):
         os.makedirs(path)   

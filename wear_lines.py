@@ -41,7 +41,7 @@ def read_all_lines(lines):
                             conected=conected,
                             length=length)
         line['length'] = length
-        print(length)
+        # print(length)
         
 
 def read_data_in_base():
@@ -90,5 +90,5 @@ if __name__ == '__main__':
     with app.app_context():
         while True:
             read_and_save_in_base()
-            break
+            # break
             _time.sleep(60)

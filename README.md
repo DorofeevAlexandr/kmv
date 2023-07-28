@@ -86,22 +86,24 @@ autostart=true
 autorestart=true
 redirect_stderr=true
 
-[program:kmv-celery]
-command=/home/amd/venv/bin/celery -A tasks worker --loglevel=INFO
-directory=/home/amd/kmv/
-autostart=true
-autorestart=true
-redirect_stderr=true
-
-[program:kmv-celery-beat]
-command=/home/amd/venv/bin/celery -A tasks beat
-directory=/home/amd/kmv/
-autostart=true
-autorestart=true
-redirect_stderr=true
-
 --------------
 
+
+[program:wear_lines]
+command = python wear_lines.py
+directory= /home/amd/kmv/
+environment=PATH= "/home/amd/venv/bin"
+autostart=true
+autorestart=true
+redirect_stderr=true
+
+
+
+
+-------------------------------------------------------
+stderr_logfile=/var/log/supervisor/wear_lines.err.log
+stdout_logfile=/var/log/supervisor/wear_lines.out.log
+======================================================================
 Сначала зарегистрируем новый конфиг с помощью команды 
 supervisorctl reread
 
