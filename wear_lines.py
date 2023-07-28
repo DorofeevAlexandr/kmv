@@ -1,7 +1,6 @@
 from datetime import datetime
 from cfg import LINES_PARAMS
 from read_counter import read_input_registers_modbus_device, get_conection, get_indikator_value
-from save_csv_file import append_in_csv
 import time as _time
 
 from webapp import create_app
@@ -83,12 +82,12 @@ def update_line_in_base(line_params, ind_value=0, conected=False, length=0):
 def read_and_save_in_base():
     lines = read_data_in_base()
     read_all_lines(lines)
-    append_in_csv(lines)
 
 
 if __name__ == '__main__':
     with app.app_context():
         while True:
-            read_and_save_in_base()
+            lines = read_data_in_base()
+            read_all_lines(lines)
             # break
-            _time.sleep(60)
+            _time.sleep(15)

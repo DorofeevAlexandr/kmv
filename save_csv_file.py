@@ -1,6 +1,11 @@
 import csv
 from datetime import datetime, timedelta
 import os
+import time as _time
+from webapp import create_app
+from wear_lines import read_data_in_base
+
+app = create_app()
 
 
 def append_in_csv(lines):        
@@ -10,6 +15,7 @@ def append_in_csv(lines):
         st_time = str(datetime.now().hour) + ':' + str(datetime.now().minute) + ':' + str(datetime.now().second)
         file_writer.writerow(['time'] + [line['name'] for line in lines])
         file_writer.writerow([st_time] + [line['length'] for line in lines])
+
 
 def create_dir():
     dt = datetime.now() - timedelta(hours=8)
@@ -23,3 +29,13 @@ def create_dir():
     if not os.path.isdir(path):
         os.makedirs(path)   
     return file_name
+
+
+
+if __name__ == '__main__':
+    with app.app_context():
+        while True:
+            lines = read_data_in_base()
+            append_in_csv(lines)
+            # break
+            _time.sleep(56)

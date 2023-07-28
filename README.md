@@ -86,9 +86,6 @@ autostart=true
 autorestart=true
 redirect_stderr=true
 
---------------
-
-
 [program:wear_lines]
 command = python wear_lines.py
 directory= /home/amd/kmv/
@@ -97,7 +94,13 @@ autostart=true
 autorestart=true
 redirect_stderr=true
 
-
+[program:save_csv_file]
+command = python save_csv_file.py
+directory= /home/amd/kmv/
+environment=PATH= "/home/amd/venv/bin"
+autostart=true
+autorestart=true
+redirect_stderr=true
 
 
 -------------------------------------------------------
