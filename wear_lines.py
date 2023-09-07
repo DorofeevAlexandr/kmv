@@ -15,6 +15,15 @@ COUNTER_SIMULATION = False
 app = create_app()
 
 
+def get_speed(dt_old, length, old_length):
+    dt = datetime.now() - dt_old
+    seconds = dt.total_seconds()
+    if seconds == 0:
+        return 0
+    else:
+        return (length - old_length) / seconds
+
+
 def read_all_lines(lines):
     for line in lines:
         if line['port'] == 0:
@@ -68,12 +77,14 @@ def read_data_in_base():
 
 def update_line_in_base(line_params, ind_value=0, conected=False, length=0):
     line_number = line_params['line_number']
+    speed_line = get_speed(line_params['updated_dt'], length, line_params['length'])
+    # print(speed_line)
     line = Lines.query.filter(Lines.line_number==line_number).first()
     if line:
         line.indikator_value = ind_value
         line.no_connection_counter = not conected
         line.length = length
-        line.speed_line = 0.0
+        line.speed_line = speed_line
         line.updated_dt=datetime.now()
         db.session.add(line)
         db.session.commit()       
