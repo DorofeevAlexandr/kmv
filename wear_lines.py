@@ -21,7 +21,7 @@ def get_speed(dt_old, length, old_length):
     if seconds == 0:
         return 0
     else:
-        return (length - old_length) / seconds
+        return 60.0 * (length - old_length) / seconds
 
 
 def read_all_lines(lines):
