@@ -18,7 +18,7 @@ def monitor():
     # if form.validate_on_submit():
     #     s_begin_time = form.select_date.data
     #     return redirect(url_for('trends.monitor'))
-    title = "Мониторинг системы отопления"
+    title = "Статистика работы линий"
     chart_data = ChartData()
     chart_data.read_data_in_base(select_date)
     weather = weather_by_city(current_app.config["WEATHER_DEFAULT_CITY"])
