@@ -57,11 +57,11 @@ def read_data_in_base():
             'k' : line.k,
             'no_connection_counter' : line.no_connection_counter,
             'indikator_value' : line.indikator_value, 
-            'length' : line.length,
-            'speed_line' : line.speed_line,
+            'length' : round(line.length, 2),
+            'speed_line' : round(line.speed_line, 2),
             'description' : line.description,
             'created_dt' : line.created_dt,
-            'updated_dt' : line.updated_dt,
+            'updated_dt' : line.updated_dt.strftime("%Y-%m-%d %H:%M:%S"),
         })
     return params
 
